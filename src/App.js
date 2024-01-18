@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import Home from './pages/home/home';
+import Login from './pages/login/login';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Pure from './pages/pure-component/pure';
+import ProtectedRoute from './ProtectedRoute';
+import Parent from './pages/parent-context/parent';
+import Counter from './pages/counter-use-memo/Counter';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Routes>
+        <Route path="login" element={<Login />} />
+        <Route path="pure" element={<Pure />} />
+        <Route path="context-api" element={<Parent />} />
+        <Route path="use-memo" element={<Counter />} />
+        <Route path="home" element={
+        <ProtectedRoute>
+        <Home/>
+        </ProtectedRoute>
+     }/>
+        <Route path="*" element={<Login />} />
+    </Routes>
+  </BrowserRouter>
   );
 }
 
